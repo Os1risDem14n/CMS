@@ -1,0 +1,45 @@
+<%- include('_layout/header') %> 
+
+
+<% if(campaigns != ''){%> <%
+campaigns.forEach(function(campaign, index){ %>
+<div class="card">
+  <div class="card-header">
+    <ul class="nav nav-pills card-header-pills">
+      <li class="nav-item">
+        <h5><%- campaign.title %></h5>
+      </li>
+      <li class="nav-item ml-auto">
+        <% if(campaign.first_closure > current){%>
+        <h5 style="color: green">Open</h5>
+        <% }else if(campaign.first_closure <= current && campaign.final_closure
+        > current){%>
+        <h5 style="color: orange">First closure closed</h5>
+        <%}else{%>
+        <h5 style="color: red">Closed</h5>
+        <% } %>
+      </li>
+    </ul>
+  </div>
+  <div class="card-body">
+    <p class="card-text"><%- campaign.name %></p>
+    <p class="card-text">
+      <%- campaign.first_closure.getMonth() + 1 %>/<%-
+      campaign.final_closure.getDate()%>/<%-
+      campaign.final_closure.getFullYear() %> <%-
+      campaign.final_closure.getHours()%>:<%-
+      campaign.final_closure.getMinutes() %>
+    </p>
+    <p class="card-text">
+      <%- campaign.final_closure.getMonth() + 1 %>/<%-
+      campaign.final_closure.getDate()%>/<%-
+      campaign.final_closure.getFullYear() %> <%-
+      campaign.final_closure.getHours()%>:<%-
+      campaign.final_closure.getMinutes() %>
+    </p>
+    <a href="/campaign_detail/<%= campaign._id %>" class="stretched-link"
+      >View</a
+    >
+  </div>
+</div>
+<% }) %> <% } %> <%- include('_layout/footer') %>
